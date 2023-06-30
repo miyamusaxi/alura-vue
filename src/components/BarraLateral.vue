@@ -16,10 +16,13 @@ export default defineComponent({
 <style scoped>
 /* Todo o estilo do componente */
 header{
-    padding: 3rem;
+    margin: .3rem;
+    padding: .9rem;
     background: #0d3b66;
     width: 100%;
     height: 100vh;
+    border: #0d3b66;
+    border-radius: .5rem;
 }
 @media only screen and(max-width:768px){
 

@@ -10,9 +10,10 @@
                     type="text" 
                     class="input" 
                     placeholder="Qual tarefa você deseja inciar"
+                    v-model="descricao"
                 />
             </div>
-            <Temporizador/> 
+            <Temporizador @aoTemporizadorFinalizado="finalizarTarefa"/> 
         </div>
     </div>
 </template>
@@ -25,8 +26,28 @@ export default defineComponent({
     name: 'Formulario-',
     components: {
         Temporizador
+    },
+    emits:['aoSalvarTarefa'],
+    data(){
+        return{
+            descricao: ''
+    }
+    },
+    methods:{
+        finalizarTarefa(tempoDecorrido: number) : void{
+            this.$emit('aoSalvarTarefa',{
+                duracaoEmSegundos:tempoDecorrido,
+                descricao:this.descricao
+            })
+            this.descricao = ''
+        }
     }
 })
 
 </script>
 
+<style scoped>
+.box{
+    margin: .9rem;
+}
+</style>
