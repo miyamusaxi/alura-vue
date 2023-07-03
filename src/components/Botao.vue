@@ -38,5 +38,8 @@ export default defineComponent({
 <style scoped>
 .button{
     padding: .9rem;
+    background: #1060aae3;
+    border-color: #1060aae3;
+    color:#ddd
 }
 </style>
