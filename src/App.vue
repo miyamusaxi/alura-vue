@@ -67,13 +67,13 @@ main {
   --bg-primario: #fff;
   --texto-primario: #000;
   --bg-tarefa:#FAF0CA;
-  --texto-tarefa:#000;
+  --texto-tarefa:#333333;
 }
 main.modo-escuro{
   --bg-primario: #2e3045;
   --texto-primario:#ddd;
-  --bg-tarefa:#a99440;
-  --texto-tarefa:#ddd;  
+  --bg-tarefa:#c5a628;
+  --texto-tarefa:#dddbdb;  
 }
 .conteudo{
   background: var(--bg-primario);
