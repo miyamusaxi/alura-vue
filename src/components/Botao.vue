@@ -41,5 +41,6 @@ export default defineComponent({
     background: #1060aae3;
     border-color: #1060aae3;
     color:#ddd
+    
 }
 </style>

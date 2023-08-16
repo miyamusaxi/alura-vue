@@ -57,7 +57,7 @@ main.modo-escuro{
   --texto-tarefa:#dddbdb;  
 }
 .conteudo{
-  background: var(--bg-primario);
+  background:var(--bg-primario);
 }
 .barra-lateral{
   background:var(--bg-primario);
