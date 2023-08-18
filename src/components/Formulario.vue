@@ -13,23 +13,23 @@
                     v-model="descricao"
                 />
             </div>
-        </div>
-        <div class="column is-3">
-            <div class="select">
-                <select v-model="idProjeto">
-                    <option value="">Selecione o Projeto</option>
-                    <option 
-                        :value="projeto.id" 
-                        v-for="projeto in projetos" 
-                        :key="projeto.id">
-                    
-                        {{ projeto.nome }}
-                    </option>
-                </select>
+            <div class="column is-3">
+                <div class="select">
+                    <select v-model="idProjeto">
+                        <option value="">Selecione o Projeto</option>
+                        <option 
+                            :value="projeto.id" 
+                            v-for="projeto in projetos" 
+                            :key="projeto.id">
+                        
+                            {{ projeto.nome }}
+                        </option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="column">
-            <Temporizador @aoTemporizadorFinalizado="finalizarTarefa"/> 
+            <div class="column is-3">
+                <Temporizador @aoTemporizadorFinalizado="finalizarTarefa"/> 
+            </div>
         </div>
     </div>
 </template>
@@ -73,13 +73,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.box{
-    margin: .9rem;
-}
-</style>
-<style>
 .formulario{
     color: var(--texto-primario); 
     background-color: var(--bg-primario);
 }
+
+.column{
+    margin: 0 auto;
+}
+
 </style>
