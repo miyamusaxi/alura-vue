@@ -4,16 +4,16 @@ import Projetos from '../views/Projetos.vue'
 import Formulario from '../views/Projetos/Formulario.vue'
 import Lista from '../views/Projetos/Lista.vue'
 
-const rotas: RouteRecordRaw[] =  [
+const rotas: RouteRecordRaw[] = [
     {
         path: '/',
         name: 'Tarefas',
         component: Tarefas
     },
     {
-        path:'/projetos',
-        component:Projetos,
-        children:[
+        path: '/projetos',
+        component: Projetos,
+        children: [
             {
                 path: '',
                 name: 'Projetos',

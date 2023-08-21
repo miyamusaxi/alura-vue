@@ -1,8 +1,12 @@
 <template>
-  <main class="columns is-gapless is-multiline" :class="{'modo-escuro':modoEscuroAtivo}">
+  <main
+    class="columns is-gapless is-multiline"
+    :class="{ 'modo-escuro': modoEscuroAtivo }"
+  >
     <div class="column is-one-quarter barra-lateral">
       <BarraLateral @aoTemaAlterado="trocarTema" />
     </div>
+    <Notificacoes/>
     <div class="column is-three-quarter conteudo">
       <RouterView></RouterView>
     </div>
@@ -10,28 +14,27 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from "vue";
 
-import BarraLateral from './components/BarraLateral.vue'
-
-
+import BarraLateral from "./components/BarraLateral.vue";
+import Notificacoes from "./components/Notificacoes.vue"
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
     BarraLateral,
- 
+    Notificacoes
   },
   data() {
     return {
-      modoEscuroAtivo:false,
-    }
+      modoEscuroAtivo: false,
+    };
   },
   methods: {
-    trocarTema(modoEscuroAtivo:boolean){
-       this.modoEscuroAtivo = modoEscuroAtivo
-    }
-  }
+    trocarTema(modoEscuroAtivo: boolean) {
+      this.modoEscuroAtivo = modoEscuroAtivo;
+    },
+  },
 });
 </script>
 
@@ -41,26 +44,25 @@ export default defineComponent({
 }
 
 .column {
-  padding: .7rem;
+  padding: 0.7rem;
 }
 
 main {
   --bg-primario: #fff;
   --texto-primario: #000;
-  --bg-tarefa:#FAF0CA;
-  --texto-tarefa:#333333;
+  --bg-tarefa: #faf0ca;
+  --texto-tarefa: #333333;
 }
-main.modo-escuro{
+main.modo-escuro {
   --bg-primario: #2e3045;
-  --texto-primario:#ddd;
-  --bg-tarefa:#f6cf35ed;
-  --texto-tarefa:#dddbdb;  
+  --texto-primario: #ddd;
+  --bg-tarefa: #f6cf35ed;
+  --texto-tarefa: #dddbdb;
 }
-.conteudo{
-  background:var(--bg-primario);
+.conteudo {
+  background: var(--bg-primario);
 }
-.barra-lateral{
-  background:var(--bg-primario);
+.barra-lateral {
+  background: var(--bg-primario);
 }
-
 </style>
