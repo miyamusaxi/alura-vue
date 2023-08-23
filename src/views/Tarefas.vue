@@ -1,6 +1,6 @@
 <template>
   <div class="column is-three-quarter conteudo">
-    <Formulario @aoSalvarTarefa="salvarTarefa" />
+    <Formulario/>
     <div class="lista">
       <Tarefa
         v-for="(tarefa, index) in tarefas"
@@ -13,11 +13,13 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { computed, defineComponent } from "vue";
 import Formulario from "../components/Formulario.vue";
 import Tarefa from "../components/Tarefa.vue";
 import Box from "../components/Box.vue";
-import ITarefa from "../interfaces/ITarefa";
+
+import { useStore } from "@/store";
+import { OBTER_TAREFAS } from "@/store/tipo-actions";
 
 export default defineComponent({
   name: "App",
@@ -28,7 +30,6 @@ export default defineComponent({
   },
   data() {
     return {
-      tarefas: [] as ITarefa[],
       modoEscuroAtivo: false,
     };
   },
@@ -38,9 +39,17 @@ export default defineComponent({
     },
   },
   methods: {
-    salvarTarefa(tarefa: ITarefa) {
-      this.tarefas.push(tarefa);
-    },
+    // salvarTarefa(tarefa: ITarefa) {
+    //   this.tarefas.push(tarefa);
+    // },
+  },
+  setup() {
+    const store = useStore();
+    store.dispatch(OBTER_TAREFAS)
+    return {
+      tarefas: computed(() => store.state.tarefas),
+      store,
+    };
   },
 });
 </script>

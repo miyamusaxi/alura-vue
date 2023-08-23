@@ -21,11 +21,10 @@
 import { defineComponent } from "vue";
 import { useStore } from "@/store";
 
-import { ADICIONA_PROJETO, ALTERA_PROJETO } from "@/store/tipo-mutacoes";
 import { TipoNotificacao } from "@/interfaces/INotificacoes";
 
-import useNotificador from "@/hooks/notificador"
-
+import useNotificador from "@/hooks/notificador";
+import { CADASTRAR_PROJETO, EDITAR_PROJETO } from "@/store/tipo-actions";
 
 export default defineComponent({
   name: "Formulario-projeto",
@@ -50,24 +49,42 @@ export default defineComponent({
   methods: {
     salvar() {
       if (this.id) {
-        this.store.commit(ALTERA_PROJETO, {
+        this.store
+          .dispatch(EDITAR_PROJETO, {
           id: this.id,
           nome: this.nomeDoProjeto,
-        });
+        }).then(() => this.notSucessoAtualizar());
       } else {
-        this.store.commit(ADICIONA_PROJETO, this.nomeDoProjeto);
+        this.store
+          .dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto)
+          .then(() => this.notSucesso());
       }
+    },
+    notSucesso() {
       this.nomeDoProjeto = "";
-      this.notificar(TipoNotificacao.SUCESSO, 'Salvar', 'Projeto salvo com sucesso! ;)')
+      this.notificar(
+        TipoNotificacao.SUCESSO,
+        "Sucesso",
+        "Projeto salvo com sucesso! ;)"
+      );
+      this.$router.push("/projetos");
+    },
+    notSucessoAtualizar() {
+      this.nomeDoProjeto = "";
+      this.notificar(
+        TipoNotificacao.SUCESSO,
+        "Sucessso",
+        "Projeto alterado com sucesso! ;)"
+      );
       this.$router.push("/projetos");
     },
   },
   setup() {
-    const store = useStore()
-    const { notificar } = useNotificador()
+    const store = useStore();
+    const { notificar } = useNotificador();
     return {
       store,
-      notificar
+      notificar,
     };
   },
 });

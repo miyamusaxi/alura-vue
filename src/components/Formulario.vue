@@ -1,5 +1,5 @@
 <template>
-  <div class="box formulario">
+  <div class="box">
     <div class="columns">
       <div
         class="column is-5"
@@ -9,7 +9,7 @@
         <input
           type="text"
           class="input"
-          placeholder="Qual tarefa você deseja inciar"
+          placeholder="Qual tarefa você deseja inciar?"
           v-model="descricao"
         />
       </div>
@@ -27,7 +27,7 @@
           </select>
         </div>
       </div>
-      <div class="column is-3">
+      <div class="column">
         <Temporizador @aoTemporizadorFinalizado="finalizarTarefa" />
       </div>
     </div>
@@ -79,9 +79,13 @@ export default defineComponent({
 </script>
 
 <style scoped>
-.formulario {
+.box {
   color: var(--texto-primario);
   background-color: var(--bg-primario);
+}
+
+.button{
+  margin-left: 8px;
 }
 
 .column {
