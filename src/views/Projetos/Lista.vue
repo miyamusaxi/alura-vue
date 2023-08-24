@@ -51,9 +51,9 @@ export default defineComponent({
   },
   setup() {
     const store = useStore();
-    store.dispatch(OBTER_PROJETOS)
+    store.dispatch(OBTER_PROJETOS);
     return {
-      projetos: computed(() => store.state.projetos),
+      projetos: computed(() => store.state.projeto.projetos),
       store,
     };
   },

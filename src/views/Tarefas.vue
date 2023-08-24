@@ -1,12 +1,42 @@
 <template>
   <div class="column is-three-quarter conteudo">
-    <Formulario/>
+    <Formulario @aoSalvarTarefa="salvarTarefa" />
     <div class="lista">
       <Tarefa
         v-for="(tarefa, index) in tarefas"
         :key="index"
         :tarefa="tarefa"
+        @aoTarefaClicada="selecionarTarefa"
       />
+      <div class="modal" :class="{ 'is-active': tarefaSelecionada }" v-if="tarefaSelecionada">
+        <div class="modal-background">
+          <div class="modal-card">
+            <header class="modal-card-head">
+              <p class="modal-card-tite">Editando uma tarefa</p>
+              <button
+                @click="fecharModal"
+                class="delete"
+                arial-label="close"
+              ></button>
+            </header>
+            <section class="modal-card-body">
+              <div class="field">
+                <label for="descricaoTarefa" class="label">Descrição</label>
+                <input
+                  type="text"
+                  class="input"
+                  v-model="tarefaSelecionada.descricao"
+                  id="descricaoTarefa"
+                />
+              </div>
+            </section>
+            <footer class="modal-card-foot">
+              <button @click="alterarTarefa" class="button is-success">Salvar</button>
+              <button @click="fecharModal" class="button">Cancelar</button>
+            </footer>
+          </div>
+        </div>
+      </div>
       <Box v-if="listaEstaVazia"> Você não está muito produtivo hoje :( </Box>
     </div>
   </div>
@@ -19,7 +49,13 @@ import Tarefa from "../components/Tarefa.vue";
 import Box from "../components/Box.vue";
 
 import { useStore } from "@/store";
-import { OBTER_TAREFAS } from "@/store/tipo-actions";
+import {
+  CADASTRAR_TAREFA,
+  OBTER_PROJETOS,
+  OBTER_TAREFAS,
+  EDITAR_TAREFA,
+} from "@/store/tipo-actions";
+import ITarefa from "@/interfaces/ITarefa";
 
 export default defineComponent({
   name: "App",
@@ -31,6 +67,7 @@ export default defineComponent({
   data() {
     return {
       modoEscuroAtivo: false,
+      tarefaSelecionada: null as ITarefa | null,
     };
   },
   computed: {
@@ -39,15 +76,26 @@ export default defineComponent({
     },
   },
   methods: {
-    // salvarTarefa(tarefa: ITarefa) {
-    //   this.tarefas.push(tarefa);
-    // },
+    salvarTarefa(tarefa: ITarefa) {
+      this.store.dispatch(CADASTRAR_TAREFA, tarefa);
+    },
+    selecionarTarefa(tarefa: ITarefa) {
+      this.tarefaSelecionada = tarefa;
+    },
+    fecharModal() {
+      this.tarefaSelecionada = null;
+    },
+    alterarTarefa() {
+      this.store.dispatch(EDITAR_TAREFA, this.tarefaSelecionada)
+        .then(() => this.fecharModal())
+    },
   },
   setup() {
     const store = useStore();
-    store.dispatch(OBTER_TAREFAS)
+    store.dispatch(OBTER_TAREFAS);
+    store.dispatch(OBTER_PROJETOS);
     return {
-      tarefas: computed(() => store.state.tarefas),
+      tarefas: computed(() => store.state.tarefa.tarefas),
       store,
     };
   },

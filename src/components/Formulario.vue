@@ -41,6 +41,7 @@ import { notificacaoMixin } from "@/mixins/notificar";
 import { TipoNotificacao } from "@/interfaces/INotificacoes";
 import { useStore } from "@/store";
 
+
 export default defineComponent({
   name: "Formulario-",
   components: {
@@ -72,7 +73,7 @@ export default defineComponent({
   setup() {
     const store = useStore();
     return {
-      projetos: computed(() => store.state.projetos),
+      projetos: computed(() => store.state.projeto.projetos),
     };
   },
 });

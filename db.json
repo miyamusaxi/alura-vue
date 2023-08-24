@@ -3,17 +3,48 @@
     {
       "id": 1,
       "nome": "Alura Tracker 3.0"
+    },
+    {
+      "nome": "Python",
+      "id": 2
     }
   ],
   "tarefas": [
     {
       "id": 1,
       "duracaoEmSegundos": 120,
-      "descricao": "Configuração do ambiente",
+      "descricao": "Configuração do ambiente 2",
       "projeto": {
         "id": 1,
-        "nome": "Alura Tracker 3.0" 
+        "nome": "Alura Tracker 3.0"
       }
+    },
+    {
+      "duracaoEmSegundos": 3,
+      "descricao": "Mister 2 3",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker 3.0"
+      },
+      "id": 2
+    },
+    {
+      "duracaoEmSegundos": 18,
+      "descricao": "Orientação a Objetos",
+      "projeto": {
+        "nome": "Python",
+        "id": 2
+      },
+      "id": 3
+    },
+    {
+      "duracaoEmSegundos": 7,
+      "descricao": "amo-te",
+      "projeto": {
+        "id": 1,
+        "nome": "Alura Tracker 3.0"
+      },
+      "id": 4
     }
   ]
 }
