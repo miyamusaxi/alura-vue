@@ -7,13 +7,17 @@
     {
       "nome": "Python",
       "id": 2
+    },
+    {
+      "id": 3,
+      "nome": "TypeScript 2.0"
     }
   ],
   "tarefas": [
     {
       "id": 1,
       "duracaoEmSegundos": 120,
-      "descricao": "Configuração do ambiente 2",
+      "descricao": "Configuração do ambiente 2.2",
       "projeto": {
         "id": 1,
         "nome": "Alura Tracker 3.0"
@@ -21,7 +25,7 @@
     },
     {
       "duracaoEmSegundos": 3,
-      "descricao": "Mister 2 3",
+      "descricao": "Mister 2.3",
       "projeto": {
         "id": 1,
         "nome": "Alura Tracker 3.0"
@@ -45,6 +49,33 @@
         "nome": "Alura Tracker 3.0"
       },
       "id": 4
+    },
+    {
+      "duracaoEmSegundos": 6,
+      "descricao": "AAAAAAAAAAAA",
+      "projeto": {
+        "nome": "Python",
+        "id": 2
+      },
+      "id": 5
+    },
+    {
+      "duracaoEmSegundos": 3,
+      "descricao": "aaaaaaaa",
+      "projeto": {
+        "nome": "Python",
+        "id": 2
+      },
+      "id": 6
+    },
+    {
+      "duracaoEmSegundos": 6,
+      "descricao": "aaaaaaaaaaaaaaaa",
+      "projeto": {
+        "nome": "Python",
+        "id": 2
+      },
+      "id": 7
     }
   ]
 }

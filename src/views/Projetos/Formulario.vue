@@ -25,6 +25,7 @@ import { TipoNotificacao } from "@/interfaces/INotificacoes";
 
 import useNotificador from "@/hooks/notificador";
 import { CADASTRAR_PROJETO, EDITAR_PROJETO } from "@/store/tipo-actions";
+import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "Formulario-projeto",
@@ -33,53 +34,57 @@ export default defineComponent({
       type: String,
     },
   },
-  methods: {
-    salvar() {
-      if (this.id) {
-        this.store
-          .dispatch(EDITAR_PROJETO, {
-          id: this.id,
-          nome: this.nomeDoProjeto,
-        }).then(() => this.notSucessoAtualizar());
-      } else {
-        this.store
-          .dispatch(CADASTRAR_PROJETO, this.nomeDoProjeto)
-          .then(() => this.notSucesso());
-      }
-    },
-    notSucesso() {
-      this.nomeDoProjeto = "";
-      this.notificar(
-        TipoNotificacao.SUCESSO,
-        "Sucesso",
-        "Projeto salvo com sucesso! ;)"
-      );
-      this.$router.push("/projetos");
-    },
-    notSucessoAtualizar() {
-      this.nomeDoProjeto = "";
-      this.notificar(
-        TipoNotificacao.SUCESSO,
-        "Sucessso",
-        "Projeto alterado com sucesso! ;)"
-      );
-      this.$router.push("/projetos");
-    },
-  },
   setup(props) {
+    
+    const router = useRouter();
+
     const store = useStore();
     const { notificar } = useNotificador();
 
     const nomeDoProjeto = ref("")
-    
+
     if (props.id){
       const projeto = store.state.projeto.projetos.find((proj) => proj.id == props.id);
       nomeDoProjeto.value = projeto?.nome || "";
     }
+
+    const notSucesso = () => {
+      nomeDoProjeto.value = "";
+      notificar(
+        TipoNotificacao.SUCESSO,
+        "Sucesso",
+        "Projeto salvo com sucesso! ;)"
+      );
+      router.push("/projetos");
+    }
+    const notSucessoAtualizar = () => {
+      nomeDoProjeto.value = "";
+      notificar(
+        TipoNotificacao.SUCESSO,
+        "Sucessso",
+        "Projeto alterado com sucesso! ;)"
+      );
+      router.push("/projetos");
+    }
+
+    const salvar = () => {
+      if (props.id) {
+        store
+          .dispatch(EDITAR_PROJETO, {
+          id: props.id,
+          nome: nomeDoProjeto.value,
+        }).then(() => notSucessoAtualizar());
+      } else {
+        store
+          .dispatch(CADASTRAR_PROJETO, nomeDoProjeto.value)
+          .then(() => notSucesso());
+      }
+    }
     return {
       store,
       notificar,
-      nomeDoProjeto
+      nomeDoProjeto,
+      salvar
     };
   },
 });
